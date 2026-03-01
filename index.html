@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+
+    <title>Test Auxiliares Administrativos AGE</title>
+
+    <meta name="description" content="Simulador profesional de test para Auxiliar Administrativo del Estado con estadísticas reales y rendimiento por bloques.">
+
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0f172a">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<header>
+    <div class="header-content">
+        <h1>👀 Oposiciones AGE</h1>
+        <p>Auxiliar Administrativo del Estado</p>
+    </div>
+    <div class="theme-toggle" id="theme-toggle" title="Cambiar tema">
+        🌙
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- ================= DASHBOARD ================= -->
+    <section id="setup-screen" class="screen active dashboard">
+
+        <div class="dashboard-top">
+            <div class="app-brand">
+                <h2>Test AGE</h2>
+                <span class="app-sub">Auxiliar Administrativo</span>
+            </div>
+
+            <div class="error-search" id="error-btn" style="cursor:pointer;">
+    🔎 <span>Buscar errores</span>
+    <span id="error-count" style="margin-left:8px; font-weight:600;">(0)</span>
+</div>
+        </div>
+
+        <!-- RENDIMIENTO -->
+        <div class="performance-card">
+            <h3>Tu rendimiento</h3>
+
+            <div class="performance-stats">
+
+                <div class="perf-item">
+                    <span id="perf-media" class="perf-number">0.00</span>
+                    <span class="perf-label">Nota Media</span>
+                </div>
+
+                <div class="perf-item">
+                    <span id="perf-b1" class="perf-number">0%</span>
+                    <span class="perf-label">Bloque I</span>
+                </div>
+
+                <div class="perf-item">
+                    <span id="perf-b2" class="perf-number">0%</span>
+                    <span class="perf-label">Bloque II</span>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- BLOQUES -->
+        <div class="blocks-grid">
+            <div class="dashboard-block selected" data-block="1">
+                <h3>📁 Bloque I</h3>
+                <p>Actividad Administrativa y Ofimática</p>
+            </div>
+
+            <div class="dashboard-block" data-block="2">
+                <h3>🧠 Bloque II</h3>
+                <p>Psicotécnicos</p>
+            </div>
+        </div>
+
+        <!-- NIVELES -->
+        <div class="levels-section">
+            <h3>Nivel de test</h3>
+            <div class="levels-buttons">
+                <button class="level-btn">Fácil</button>
+                <button class="level-btn selected">Medio</button>
+                <button class="level-btn">Difícil</button>
+            </div>
+        </div>
+
+        <button id="start-btn" class="btn btn-primary btn-large">
+            Comenzar Test
+        </button>
+
+    </section>
+
+
+    <!-- ================= TEST ================= -->
+    <section id="test-screen" class="screen">
+
+        <div class="test-header">
+            <div class="progress-container">
+                <span id="question-counter">Pregunta 1 de 10</span>
+                <div class="progress-bar-bg">
+                    <div id="progress-bar-fill" class="progress-bar-fill"></div>
+                </div>
+            </div>
+
+            <div class="timer" id="timer">
+                ⏱️ 00:00
+            </div>
+        </div>
+
+        <div class="question-container">
+            <h3 id="question-text" class="question-text">
+                Cargando pregunta...
+            </h3>
+            <div id="options-container" class="options-container"></div>
+        </div>
+
+        <div class="test-actions">
+            <button id="prev-btn" class="btn btn-secondary" disabled>
+                Anterior
+            </button>
+
+            <div class="action-group">
+                <button id="skip-btn" class="btn btn-warning">
+                    Dejar en blanco
+                </button>
+
+                <button id="next-btn" class="btn btn-primary">
+                    Siguiente
+                </button>
+
+                <button id="finish-btn" class="btn btn-danger hidden">
+                    Finalizar Test
+                </button>
+            </div>
+        </div>
+
+    </section>
+
+
+   <!-- ================= RESULTADOS ================= -->
+<section id="results-screen" class="screen">
+
+    <h2>Resultados del Test</h2>
+
+    <div class="score-card card">
+
+        <div class="score-circle">
+            <span id="final-score">0.00</span>
+            <small>Nota Final</small>
+        </div>
+
+        <div class="score-stats">
+
+            <div class="stat-item correct">
+                <span class="stat-icon">✅</span>
+                <div class="stat-info">
+                    <span id="stat-correct" class="stat-value">0</span>
+                    <span class="stat-label">Aciertos (+1.00)</span>
+                </div>
+            </div>
+
+            <div class="stat-item incorrect">
+                <span class="stat-icon">❌</span>
+                <div class="stat-info">
+                    <span id="stat-incorrect" class="stat-value">0</span>
+                    <span class="stat-label">Fallos (-0.33)</span>
+                </div>
+            </div>
+
+            <div class="stat-item blank">
+                <span class="stat-icon">⚪</span>
+                <div class="stat-info">
+                    <span id="stat-blank" class="stat-value">0</span>
+                    <span class="stat-label">Blancos (0.00)</span>
+                </div>
+            </div>
+
+            <div class="stat-item time">
+                <span class="stat-icon">⏱️</span>
+                <div class="stat-info">
+                    <span id="stat-time" class="stat-value">00:00</span>
+                    <span class="stat-label">Tiempo</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="review-section">
+        <h3>Revisión de Preguntas</h3>
+        <div id="review-container"></div>
+    </div>
+
+    <div class="results-actions">
+        <button id="restart-btn" class="btn btn-primary btn-large">
+            Hacer otro test 🔄
+        </button>
+    </div>
+
+</section>
+
+
+<!-- ================= PANTALLA ERRORES ================= -->
+<section id="errors-screen" class="screen">
+
+    <h2>Preguntas Falladas</h2>
+
+    <!-- Aquí se cargarán dinámicamente las preguntas falladas -->
+    <div id="errors-container" class="review-section" style="margin-top:20px;"></div>
+
+    <div style="margin-top:30px;">
+        <button id="back-from-errors" class="btn btn-primary btn-large">
+            Volver al inicio
+        </button>
+    </div>
+
+</section>
+
+</main>
+
+<script src="questions.js"></script>
+<script src="app.js"></script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js');
+}
+</script>
+
+</body>
+</html>
